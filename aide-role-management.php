@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Aide::Role Management
+Plugin Name: Aide :: Role Management
 Description: Manage roles and set auto role assignment rules.
 Version: 1.0.0
 Requires at least: 6.0

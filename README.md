@@ -1,103 +1,69 @@
-# Aide::Role Management
+# Aide :: Role Management
 
-**Aide::Role Management** is a lightweight WordPress plugin that allows administrators to easily manage WordPress roles and set up automatic role assignment rules.  
-It is designed for situations where you need to auto-assign one or more roles to users based on their primary role or registration events.
+WordPress plugin to manage custom roles and configure automatic role assignment rules for newly registered users.
 
----
+## Features
 
-## ✨ Features
+- Adds an admin menu: **Aide - Role**.
+- Create new custom roles from wp-admin.
+- Delete only roles created by this plugin (prevents deleting core/third-party roles).
+- Define auto-assignment rules:
+  - **Trigger role** -> **Assigned role**
+  - Applied when a new user is registered.
+- Manage and search configured rules from an admin list table.
+- Security protections:
+  - `manage_options` capability checks
+  - Nonce verification for add/delete actions
+  - Sanitized request handling and safe redirects
 
-- **Role List View** – View all registered WordPress roles in a sortable and searchable list.
-- **Add New Role** – Create custom roles directly from the admin dashboard.
-- **Auto Assign Role Rules** – Define rules to automatically assign additional roles when a user is registered or updated.
-- **Role Deletion for Rules** – Easily remove existing auto-assign rules.
-- **Clean Admin UI** – Simple, WordPress-style admin interface.
+## Requirements
 
-## 📂 Plugin Structure
+- WordPress 6.0+
+- PHP 7.4+
 
-wp-plugin-aide-role-management/
+## Installation
 
-├── aide-role-management.php # Main plugin file
+1. Copy the `aide-role-management` folder into `wp-content/plugins/`.
+2. In WordPress admin, go to **Plugins**.
+3. Activate **Aide :: Role Management**.
 
-├── admin/
+## Usage
 
-│ ├── main.php # UI for role listing
+### Add a custom role
 
-│ ├── add-role.php # Add role functionality
+1. Go to **Aide - Role -> Add Role**.
+2. Enter:
+   - role key (slug)
+   - display name
+3. Save the role.
 
-│ ├── assign-role.php # Auto-assign rule UI
+### Create an auto-assign rule
 
-│ └── functions.php # Helper functions
+1. Go to **Aide - Role -> Assign Role**.
+2. Choose a trigger role and a role to assign.
+3. Save the rule.
 
-└── README.md
+When a user is registered and has the trigger role, the assigned role is automatically added.
 
----
+## Safety Notes
 
-## 🚀 Installation
+- Role/rule changes are admin-only.
+- Role deletion is restricted to roles created by this plugin.
+- A role cannot be deleted if it is currently assigned to any user.
 
-1. **Download** or **Clone** the repository.
-   ```bash
-   git clone https://github.com/mahidulislamtamim/wp-plugin-aide-role-management.git
-Upload the folder to your WordPress plugins directory:
+## Data Storage
 
-swift
-Copy
-Edit
-/wp-content/plugins/wp-plugin-aide-role-management/
-Activate the plugin from WordPress Admin → Plugins.
+The plugin stores settings in WordPress options:
 
-## 🛠️ Usage
-Add a New Role
-Navigate to Aide - Role → Add Role.
+- `aide_role_auto_assign` (rule set)
+- `aide_role_created_roles` (plugin-created role slugs)
 
-Fill in the role name, slug, and capabilities.
+## Plugin Details
 
-Click Save.
+- **Plugin Name:** Aide :: Role Management
+- **Version:** 1.0.0
+- **Author:** Aide247
+- **Plugin URI:** https://aide247.com/
+- **Text Domain:** `aiderolemanagement`
+- **License:** GPLv2 or later
 
-Assign Roles Automatically
-Navigate to Aide - Role → Assign Role.
-
-Create a rule: When a user has role X, automatically assign role Y.
-
-Save the rule.
-
-The rule will be applied when new users are created or updated.
-
-View and Manage Rules
-Navigate to Aide - Role → Role Rules.
-
-View existing auto-assign rules in a sortable and searchable table.
-
-Delete unwanted rules with one click.
-
-## ⚙️ Hooks & Filters
-The plugin provides several hooks for developers:
-
-aide_role_added – Fires when a new role is created.
-
-aide_role_rule_added – Fires when an auto-assign rule is added.
-
-aide_role_rule_deleted – Fires when a rule is removed.
-
-## 📌 Requirements
-WordPress 5.5+
-
-PHP 7.4+
-
-## 📄 License
-This plugin is licensed under the GPL-2.0+.
-
-## 🤝 Contributing
-Pull requests are welcome! If you have suggestions, bug fixes, or improvements:
-
-Fork the repository.
-
-Create your feature branch.
-
-Submit a pull request.
-
-## 👨‍💻 Author
-
-Developed by Aide .
-
-Website: https://aide247.com
